@@ -1,8 +1,14 @@
-import { RouterProvider } from "react-router-dom"
-import {  router } from "./routes"
+import { AppRoutes } from "./routes/AppRoutes"
+import { Profile } from "./profile/Profile"
+import { Navegacion } from "./navegacion"
 
 export const App = () => {
   return (
-    <RouterProvider router={router}/>
+    <>
+      <Profile />
+      <Navegacion />
+      <AppRoutes />
+    </>
+
   )
 }
