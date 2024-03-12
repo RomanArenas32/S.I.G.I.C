@@ -1,4 +1,4 @@
-import { Logo } from "../utilidades"
+import { DarkMode, Logo } from "../utilidades"
 
 export const Profile = () => {
   return (
@@ -8,7 +8,8 @@ export const Profile = () => {
         <h1 className="text-5xl font-bold">S.I.G.I.C</h1>
       </div>
 
-      <div className="flex flex-row items-center gap-6">
+      <div className="flex flex-row items-center gap-8">
+        <DarkMode/>
         <h2>iniciar sesion</h2>
         <h2>perfil</h2>
       </div>
