@@ -1,6 +1,8 @@
 
 export const Home = () => {
   return (
-    <div>Home</div>
+    <>
+      <div className="bg-red-600 text-black" >Home</div>
+    </>
   )
 }
