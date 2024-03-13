@@ -9,12 +9,15 @@
 }
 
 
-.ligth {
+body {
   background-color: beige;
   color: black;
+  transition: 1.5s;
+
 }
 
 .dark {
   background-color: rgb(16, 16, 44);
   color: white;
+  transition: 1.5s;
 }

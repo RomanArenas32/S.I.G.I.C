@@ -4,7 +4,7 @@ import { ReunionApp } from "../reunion";
 import { CargarEventos } from "../reunion/pages";
 import { Login } from "../auth";
 
-const logeado = true;
+const logeado = false;
 
 export const AppRoutes = () => {
   return (
