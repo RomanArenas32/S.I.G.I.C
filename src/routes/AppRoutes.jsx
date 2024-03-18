@@ -4,7 +4,7 @@ import { ReunionApp } from "../reunion";
 import { CargarEventos } from "../reunion/pages";
 import { Login } from "../auth";
 
-const logeado = false;
+const logeado = true;
 
 export const AppRoutes = () => {
   return (
@@ -12,6 +12,8 @@ export const AppRoutes = () => {
       {logeado ? (
         <>
           <Route path="/" element={<Home />} />
+
+          {/* of.reunion */}
           <Route path="/reunion" element={<ReunionApp />} />
           <Route path="/reunion/cargareventos" element={<CargarEventos />} />
           <Route path="/*" element={<Navigate to="/" replace />} />
