@@ -1,18 +1,17 @@
 import { useState } from "react";
-import { delegaciones } from '../../info'
+import { delegaciones, eventoPorTipo, tipoEvento } from '../../info'
 
 export const CargarEventos = () => {
 
-  const [filtro, setFiltro] = useState('');
 
-  const handleChange = (e) => {
-    setFiltro(e.target.value);
-  };
 
-  console.log(delegaciones)
   const [formData, setFormData] = useState({
     responsable: "",
-    password: ""
+    tipo: "",
+    subtipo: "",
+    programacion: "",
+    infoDelegacion: "",
+    inforReunion: ""
   });
 
   const handleInputChange = (e) => {
@@ -29,56 +28,89 @@ export const CargarEventos = () => {
   };
 
   return (
-    <div className="grid place-items-center items-center h-full my-32">
+    <div className=" h-max  mb-28 mt-20 p-10 w-full grid place-items-center ">
+      <div className="w-full max-w-2xl bg-gray-800 rounded-lg shadow-2xl p-6 grid place-items-center ">
+        <h2 className="text-2xl font-bold text-gray-200 mb-4 uppercase pb-2">Carga de eventos</h2>
 
-      <div className="bg-gray-900 border-4 border-blue-900 rounded-2xl hover:border-blue-500 transition-all duration-200 shadow-2xl">
-        <div className="mx-auto flex items-center space-y-4 py-16 px-12 font-semibold text-gray-500 flex-col">
+        <form onSubmit={handleSubmit}>
+          <div className="flex flex-col gap-5 md:flex-row">
 
-          <h1 className="text-white text-2xl">Carga de eventos</h1>
-          <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-            <div className="flex flex-col justify-center items-center ">
-              <input
-              className="w-full text-center p-2"
-                type="text"
-                value={filtro}
-                onChange={handleChange}
-                placeholder="Buscar delegación..."
-                
-              />
-              <select className="text-white">
-                {delegaciones
-                  .filter(delegacion => delegacion.toLowerCase().includes(filtro.toLowerCase()))
-                  .map(delegacion => (
-                    <option key={delegacion} value={formData.responsable} id="responsable" onChange={handleInputChange}>{delegacion}</option>
-                  ))}
+            <div className="flex flex-col">
+
+              <select
+                id="responsable" onChange={handleInputChange} value={formData.responsable}
+                className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+              >
+                {
+                  delegaciones.map(delegacion => (
+                    <option className="font-semibold" key={delegacion}>{delegacion}</option>
+                  ))
+                }
               </select>
+
+              <select
+                className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                id="tipo" onChange={handleInputChange} value={formData.tipo}
+              >
+                {
+                  eventoPorTipo.map(evento => (
+                    <option className="font-semibold" key={evento}>{evento}</option>
+                  ))
+                }
+              </select>
+
+              <input
+                placeholder="ej: Reclamo en contra del DNU"
+                className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                type="text"
+                id="subtipo"
+                onChange={handleInputChange} value={formData.subtipo}
+              />
+
+              <select
+                className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                id="programacion" onChange={handleInputChange} value={formData.programacion}
+              >
+                {
+                  tipoEvento.map(evento => (
+                    <option className="font-semibold" key={evento}>{evento}</option>
+                  ))
+                }
+              </select>
+
             </div>
 
-            <input
-              className="w-full p-2 bg-blue-900 rounded-md border border-gray-700 focus:border-blue-700 hover:border-blue-500 transition-all duration-200"
-              placeholder="Usuario"
-              type="text"
-              name="user"
-              id="user"
-              onChange={handleInputChange} value={formData.user}
-            />
-            <input
-              className="w-full p-2 bg-blue-900 rounded-md border border-gray-700 focus:border-blue-700 hover:border-blue-500 transition-all duration-200"
-              placeholder="contraseña"
-              type="password"
-              name="password"
-              id="password"
-              onChange={handleInputChange} value={formData.password}
-            />
-            <button
-              className="w-full p-2 bg-gray-50 rounded-full font-bold text-gray-900 border-4 border-gray-700 hover:border-blue-500 transition-all duration-200"
-              type="submit"
-            >
-              Ingresar
-            </button>
-          </form>
-        </div>
+
+            <div className="flex flex-col">
+
+              <textarea
+                placeholder="Informe de la delegacion"
+                className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                id="infoDelegacion" onChange={handleInputChange} value={formData.infoDelegacion}
+              ></textarea>
+
+              <textarea
+                placeholder="Informe de Reunion"
+                className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                id="inforReunion" onChange={handleInputChange} value={formData.inforReunion}
+              ></textarea>
+
+
+            </div>
+          </div>
+
+
+
+          <button
+            className="w-full my-2 bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150"
+            type="submit"
+          >
+            Cargar
+          </button>
+
+        </form>
       </div>
     </div>
-  )
+  );
+
 }
