@@ -28,8 +28,8 @@ export const CargarEventos = () => {
   };
 
   return (
-    <div className=" h-max  mb-28 mt-20 p-10 w-full grid place-items-center ">
-      <div className="w-full max-w-2xl bg-gray-800 rounded-lg shadow-2xl p-6 grid place-items-center ">
+    <div className=" h-max  mb-28 mt-20  w-full grid place-items-center ">
+      <div className="w-full max-w-2xl md:max-w-full bg-gray-800 rounded-lg shadow-2xl p-2 grid place-items-center ">
         <h2 className="text-2xl font-bold text-gray-200 mb-4 uppercase pb-2">Carga de eventos</h2>
 
         <form onSubmit={handleSubmit}>
