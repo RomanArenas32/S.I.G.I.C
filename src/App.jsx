@@ -6,10 +6,13 @@ import { Footer } from "./footer"
 export const App = () => {
   return (
     <>
-      <Profile />
-      <Navegacion />
+      <div>
+        <Profile />
+        <Navegacion />
+      </div>
+
       <AppRoutes />
-      <Footer/>
+      <Footer />
     </>
 
   )
