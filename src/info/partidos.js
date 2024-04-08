@@ -1,4 +1,5 @@
 export const partidos = [
+    "--Seleccione partido--",
     "Adolfo Alsina",
     "Adolfo Gonzalez Chavez",
     "Alberti",

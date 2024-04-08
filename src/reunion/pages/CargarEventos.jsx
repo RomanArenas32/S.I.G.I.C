@@ -1,18 +1,34 @@
 import { useState } from "react";
-import { delegaciones, eventoPorTipo, tipoEvento } from '../../info'
+import { delegaciones, eventoPorTipo, tipoEvento, partidos, localidades } from '../../info'
 
 export const CargarEventos = () => {
 
 
+  const [image, setImage] = useState(null);
+  const [organizaciones, setOrganizaciones] = useState([]);
+
+  const formatearOrganizaciones = (organizacion) => {
+    const arrayOrganizaciones = organizacion.split("-");
+    setOrganizaciones(arrayOrganizaciones)
+  }
 
   const [formData, setFormData] = useState({
     responsable: "",
+    partido: "",
+    localidad: "",
     tipo: "",
     subtipo: "",
     programacion: "",
     infoDelegacion: "",
-    inforReunion: ""
+    inforReunion: "",
+    fecha: "",
+    hora: "",
+    coordenadas: "",
+    banner: image,
+    organizaciones: organizaciones,
   });
+
+  formData.organizaciones = organizaciones;
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -22,10 +38,16 @@ export const CargarEventos = () => {
     });
   }
 
+  const handleImageChange = (e) => {
+    const selectedImage = e.target.files[0];
+    setImage(selectedImage);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData)
   };
+
+
 
   return (
 
@@ -48,6 +70,26 @@ export const CargarEventos = () => {
               }
             </select>
 
+            <select
+              id="partido" onChange={handleInputChange} value={formData.partido}
+              className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+            >
+              {
+                partidos.map(p => (
+                  <option className="font-semibold" key={p}>{p}</option>
+                ))
+              }
+            </select>
+            <select
+              id="localidad" onChange={handleInputChange} value={formData.localidad}
+              className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+            >
+              {
+                localidades.map(l => (
+                  <option className="font-semibold" key={l}>{l}</option>
+                ))
+              }
+            </select>
             <select
               className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
               id="tipo" onChange={handleInputChange} value={formData.tipo}
@@ -93,26 +135,40 @@ export const CargarEventos = () => {
 
           <div className="flex flex-col w-auto">
 
-          <input
-              placeholder="ej: Reclamo en contra del DNU"
+            <input
               className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
-              type="text"
-              id="subtipo"
-              onChange={handleInputChange} value={formData.subtipo}
+              type="date"
+              id="fecha"
+              onChange={handleInputChange} value={formData.fecha}
             />
             <input
-              placeholder="ej: Reclamo en contra del DNU"
               className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
-              type="text"
-              id="subtipo"
-              onChange={handleInputChange} value={formData.subtipo}
+              type="time"
+              id="hora"
+              onChange={handleInputChange} value={formData.hora}
             />
             <input
-              placeholder="ej: Reclamo en contra del DNU"
+              placeholder="ej: -36.781083, -59.867621"
               className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
               type="text"
-              id="subtipo"
-              onChange={handleInputChange} value={formData.subtipo}
+              id="coordenadas"
+              onChange={handleInputChange} value={formData.coordenadas}
+            />
+
+            <textarea placeholder="ORGANIZACIONES SOCIALES, SINDICATOS ETC - Separados cada un guion"
+              className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+              type="text"
+              onChange={e => formatearOrganizaciones(e.target.value)}>
+            </textarea>
+
+            {/** CARGA DEL BANNER */}
+
+            <label htmlFor="banner" className="text-gray-300 text-center pb-2">Cargar un Banner</label>
+            <input
+              type="file"
+              onChange={handleImageChange}
+              accept="image/*"
+              className="py-4 px-4 bg-gray-700 rounded-lg text-sm text-gray-300"
             />
 
 

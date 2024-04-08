@@ -1,4 +1,5 @@
 export const localidades = [
+    "--Seleccione localidad--",
     "Adolfo Gonzalez Chavez",
     "Adrogé",
     "Alberti",
