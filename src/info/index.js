@@ -3,6 +3,8 @@ export  * from './tipoEvento';
 export  * from './eventoPorTipo';
 export  * from './localidades';
 export  * from './partidos';
+export  * from './conlictividad';
+
 
 
 
