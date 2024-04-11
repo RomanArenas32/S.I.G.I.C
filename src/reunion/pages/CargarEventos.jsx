@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { delegaciones, eventoPorTipo, tipoEvento, partidos, localidades } from '../../info'
+import { delegaciones, eventoPorTipo, tipoEvento, partidos, localidades, conflictividad } from '../../info'
 
 export const CargarEventos = () => {
 
@@ -21,9 +21,13 @@ export const CargarEventos = () => {
     programacion: "",
     infoDelegacion: "",
     inforReunion: "",
+    extracto: "",
     fecha: "",
     hora: "",
     coordenadas: "",
+    entidad: "",
+    barrio: "",
+    conflictividad: "",
     banner: image,
     organizaciones: organizaciones,
   });
@@ -130,6 +134,11 @@ export const CargarEventos = () => {
               className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
               id="inforReunion" onChange={handleInputChange} value={formData.inforReunion}
             ></textarea>
+            <textarea
+              placeholder="Extracto (Breve reseña del informe)"
+              className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+              id="extracto" onChange={handleInputChange} value={formData.extracto}
+            ></textarea>
           </div>
 
 
@@ -155,21 +164,48 @@ export const CargarEventos = () => {
               onChange={handleInputChange} value={formData.coordenadas}
             />
 
+            <input
+              placeholder="lugar o entidad. ej: Ministerio de trabajo"
+              className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+              type="text"
+              id="entidad"
+              onChange={handleInputChange} value={formData.entidad}
+            />
+            <input
+              placeholder="Indique barrio donde transcurrirá el evento"
+              className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+              type="text"
+              id="barrio"
+              onChange={handleInputChange} value={formData.barrio}
+            />
             <textarea placeholder="ORGANIZACIONES SOCIALES, SINDICATOS ETC - Separados cada un guion"
               className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
               type="text"
               onChange={e => formatearOrganizaciones(e.target.value)}>
             </textarea>
+            <select
+              id="responsable" onChange={handleInputChange} value={formData.responsable}
+              className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+            >
+              {
+                conflictividad.map(c => (
+                  <option className="font-semibold" key={c}>{c}</option>
+                ))
+              }
+            </select>
 
             {/** CARGA DEL BANNER */}
 
-            <label htmlFor="banner" className="text-gray-300 text-center pb-2">Cargar un Banner</label>
-            <input
-              type="file"
-              onChange={handleImageChange}
-              accept="image/*"
-              className="py-4 px-4 bg-gray-700 rounded-lg text-sm text-gray-300"
-            />
+            <div className="bg-gray-700 flex flex-col rounded-lg">
+              <label htmlFor="banner" className="text-gray-300 text-center py-2 ">Cargar un Banner</label>
+              <input
+                type="file"
+                onChange={handleImageChange}
+                accept="image/*"
+                className="py-4 px-4   text-sm text-gray-300"
+              />
+            </div>
+
 
 
           </div>
