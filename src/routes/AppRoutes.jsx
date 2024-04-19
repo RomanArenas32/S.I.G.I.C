@@ -3,6 +3,7 @@ import { Home } from "../pages";
 import { ReunionApp } from "../reunion";
 import { CargarEventos, VistaEventos } from "../reunion/pages";
 import { Login } from "../auth";
+import { GestionUsuarios } from "../superadmin/GestionUsuarios";
 
 const logeado = true;
 
@@ -19,6 +20,9 @@ export const AppRoutes = () => {
           <Route path="/*" element={<Navigate to="/" replace />} />
           {/* of. reunion -ADMINISTRADORES */}
           <Route path="/reunion/vista" element={<VistaEventos />} />
+
+          {/* GESTION DE UAURIOS - SUPERADMINISTRADOR */}
+          <Route path="/admin" element={<GestionUsuarios />} />
 
         </>
       ) : (
