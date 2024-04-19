@@ -28,7 +28,7 @@ export const VistaEventos = () => {
                   <td className="whitespace-nowrap px-6 py-4 font-medium">
                     Primary
                   </td>
-                  <td className="whitespace-nowrap px-6 py-4">Cell</td>
+                  <td className="whitespace-nowrap px-6 py-4">Cel</td>
                   <td className="whitespace-nowrap px-6 py-4">Cell</td>
                 </tr>
                 <tr
