@@ -4,7 +4,7 @@ import { Menu } from "./Menu"
 export const MenuHamburguesa = () => {
 
 
-    const [showMenu, setShowMenu] = useState(true)
+    const [showMenu, setShowMenu] = useState(false)
 
     const handleShowMenu = () => {
         setShowMenu(!showMenu)
