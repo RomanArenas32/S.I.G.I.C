@@ -41,17 +41,19 @@ export const CrearUsuario = () => {
                         <input
                             className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                             type="text"
-                            id="nombre"
-                            placeholder="nombre completo"
-                            onChange={handleInputChange} value={formData.nombre}
-                        />
-                        <input
-                            className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
-                            type="text"
                             id="apellido"
                             placeholder="apellido"
                             onChange={handleInputChange} value={formData.apellido}
                         />
+
+                        <input
+                            className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                            type="text"
+                            id="nombre"
+                            placeholder="nombre completo"
+                            onChange={handleInputChange} value={formData.nombre}
+                        />
+
                         <input
                             className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                             type="text"
