@@ -21,3 +21,11 @@ body {
   color: white;
   transition: 1.5s;
 }
+
+.home{
+  background-image: url('./assets/imghome.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
