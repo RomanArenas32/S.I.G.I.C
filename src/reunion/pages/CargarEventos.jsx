@@ -7,6 +7,15 @@ import {
   conflictividad,
 } from "../../info";
 
+//ordenamiento de los partidos alfabeticamente
+const partidosOrdenados = {};
+Object.keys(partidos)
+  .sort()
+  .forEach((partido) => {
+    partidosOrdenados[partido] = partidos[partido];
+  });
+
+
 export const CargarEventos = () => {
   const [image, setImage] = useState(null);
   const [organizaciones, setOrganizaciones] = useState([]);
@@ -86,7 +95,7 @@ export const CargarEventos = () => {
               className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
             >
               <option value={formData.partido} id="partido">--Seleccione un partido--</option>
-              {Object.keys(partidos).map((partido) => (
+              {Object.keys(partidosOrdenados).map((partido) => (
                 <option key={partido} value={partido}>
                   {partido}
                 </option>
