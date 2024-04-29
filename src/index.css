@@ -29,3 +29,10 @@ body {
   background-repeat: no-repeat;
   height: 100vh;
 }
+
+.anim-nav{
+  position: relative;
+  overflow: hidden;
+  height: 0;
+  transition: height 0.8s ease;
+}
