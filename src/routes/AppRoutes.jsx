@@ -4,7 +4,7 @@ import { ReunionApp } from "../reunion";
 import { CargarEventos, VistaEventos } from "../reunion/pages";
 import { Login } from "../auth";
 import { GestionUsuarios } from "../superadmin/GestionUsuarios";
-import { CrearUsuario } from "../superadmin/pages";
+import { CrearUsuario, DetallesUsuario } from "../superadmin/pages";
 
 const logeado = true;
 
@@ -27,8 +27,7 @@ export const AppRoutes = () => {
           {/* GESTION DE UAURIOS - SUPERADMINISTRADOR */}
           <Route path="/admin" element={<GestionUsuarios />} />
           <Route path="/admin/createus" element={<CrearUsuario />} />
-
-
+          <Route path="/admin/usuarios/:legajo" element={<DetallesUsuario />} />
         </>
       ) : (
         <>
