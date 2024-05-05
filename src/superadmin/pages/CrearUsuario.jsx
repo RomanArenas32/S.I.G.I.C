@@ -16,6 +16,8 @@ export const CrearUsuario = () => {
     apellido: "",
     legajo: "",
     delegacion: "",
+    usuario: "",
+    password: "",
     rol: "",
     estado: true,
   });
@@ -52,8 +54,10 @@ export const CrearUsuario = () => {
       }, 3000);
       return;
     }
+    formData.usuario = `${formData.apellido.toUpperCase()}${formData.legajo}`;
+    formData.password = `${formData.legajo}`;
     try {
-      console.log(formData);
+      console.log(formData)
       const resp = await axios.post(`${url}/api/v1/usuarios`, formData);
       setMensaje({error: false, msg: resp.data.mensaje});
       setTimeout(() => {
@@ -102,7 +106,7 @@ export const CrearUsuario = () => {
               className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
               type="text"
               id="legajo"
-              placeholder="legajo"
+              placeholder="legajo sin puntos ni comas"
               onChange={handleInputChange}
               value={formData.legajo}
             />
