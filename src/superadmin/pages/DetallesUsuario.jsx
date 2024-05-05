@@ -3,10 +3,11 @@ import { delegaciones } from "../../info";
 import { roles } from "../../info/roles";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { Alerta } from "../../utils";
 
 export const DetallesUsuario = () => {
   const url = import.meta.env.VITE_API_URL;
-  const {legajo} = useParams();
+  const { legajo } = useParams();
 
   const [efectivoSeleccionado, setEfectivoSeleccionado] = useState({});
 
@@ -14,7 +15,15 @@ export const DetallesUsuario = () => {
     const obtenerUsuarioPorLegajo = async () => {
       try {
         const resp = await axios.get(`${url}/api/v1/usuarios/${legajo}`);
-        setEfectivoSeleccionado(resp.data)
+        setEfectivoSeleccionado(resp.data);
+        setFormData({
+          ...formData,
+          nombre: resp.data.nombre,
+          apellido: resp.data.apellido,
+          legajo: resp.data.legajo,
+          rol: resp.data.rol,
+          delegacion: resp.data.delegacion,
+        });
       } catch (error) {
         console.log(error);
       }
@@ -22,8 +31,6 @@ export const DetallesUsuario = () => {
 
     obtenerUsuarioPorLegajo();
   }, []);
-
-  console.log(efectivoSeleccionado)
 
   const [mensaje, setMensaje] = useState({});
   const [formData, setFormData] = useState({
@@ -146,6 +153,50 @@ export const DetallesUsuario = () => {
             </select>
           </div>
         </div>
+
+        <div className="flex w-full justify-between gap-4">
+        {
+          formData.estado ? <p className="text-white font-bold text-lg uppercase">Deshabilitar</p> : <p className="text-white font-bold text-lg uppercase">Habilitar</p>
+        }
+        
+         <label className="relative inline-flex items-center cursor-pointer">
+          <input className="sr-only peer" value={formData.estado} type="checkbox" onChange={() => setFormData({ ...formData, estado: !formData.estado })}/>
+          <div className="group peer ring-0 bg-gray-50 border-2 border-gray-900 rounded-full outline-none duration-700 after:duration-200 w-24 h-12  shadow-md peer-checked:bg-gradient-to-r  peer-focus:outline-none  after:content-[''] after:rounded-full after:absolute after:bg-gray-900 after:outline-none after:h-10 after:w-10 after:top-1 after:left-1  peer-checked:after:translate-x-12 peer-hover:after:scale-95">
+            <svg
+              y="0"
+              xmlns="http://www.w3.org/2000/svg"
+              x="0"
+              width="100"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="xMidYMid meet"
+              height="100"
+              class="absolute  top-1 left-12 fill-green-600 w-10 h-10"
+            >
+              <path
+                d="M50,18A19.9,19.9,0,0,0,30,38v8a8,8,0,0,0-8,8V74a8,8,0,0,0,8,8H70a8,8,0,0,0,8-8V54a8,8,0,0,0-8-8H38V38a12,12,0,0,1,23.6-3,4,4,0,1,0,7.8-2A20.1,20.1,0,0,0,50,18Z"
+                class="svg-fill-primary"
+              ></path>
+            </svg>
+
+            <svg
+              y="0"
+              xmlns="http://www.w3.org/2000/svg"
+              x="0"
+              width="100"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="xMidYMid meet"
+              height="100"
+              class="absolute top-1 left-1 fill-red-600  w-10 h-10"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M30,46V38a20,20,0,0,1,40,0v8a8,8,0,0,1,8,8V74a8,8,0,0,1-8,8H30a8,8,0,0,1-8-8V54A8,8,0,0,1,30,46Zm32-8v8H38V38a12,12,0,0,1,24,0Z"
+              ></path>
+            </svg>
+          </div>
+        </label>
+        </div>
+       
 
         <button
           className="w-full my-2 bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150"
