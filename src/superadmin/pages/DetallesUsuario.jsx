@@ -154,7 +154,7 @@ export const DetallesUsuario = () => {
           </div>
         </div>
 
-        <div className="flex w-full justify-center gap-4">
+        <div className="flex w-full justify-between gap-4">
         {
           formData.estado ? <p className="text-white font-bold text-lg uppercase">Deshabilitar</p> : <p className="text-white font-bold text-lg uppercase">Habilitar</p>
         }
