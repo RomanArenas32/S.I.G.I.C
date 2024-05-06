@@ -3,31 +3,35 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Alerta } from "../../utils";
 
-export const ListaEfectivos = () => {
+export const ListaEfectivosInactivos = () => {
   const url = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
-  const [efectivos, setEfectivos] = useState([]);
+  const [efectivosInactivos, setEfectivosInactivos] = useState([]);
   const [mensaje, setMensaje] = useState({});
 
   useEffect(() => {
-    const obtenerUsuariosActivos = async () => {
+    const obtenerUsuariosInactivos = async () => {
       try {
-        const resp = await axios.get(`${url}/api/v1/usuarios`);
-        setEfectivos(resp.data);
+        const resp = await axios.delete(`${url}/api/v1/usuarios/deleted`);
+        setEfectivosInactivos(resp.data);
       } catch (error) {
-        setMensaje({error: true, msg: "Error al obtener la lista de usuarios"})
+        setMensaje({
+          error: true,
+          msg: "Error al obtener la lista de efectivos inactivos",
+        });
       }
     };
-    obtenerUsuariosActivos();
+    obtenerUsuariosInactivos();
   }, []);
 
   const userDetail = (efectivo) => {
     navigate(`/admin/usuarios/${efectivo.legajo}`);
   };
 
-  const {msg} = mensaje;
+  const { msg } = mensaje;
+
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
       <div className="flex items-center justify-center p-5">
         <div className="rounded-lg bg-gray-200 p-5">
           <div className="flex">
@@ -54,11 +58,13 @@ export const ListaEfectivos = () => {
           </div>
         </div>
       </div>
-      <h2 className="font-semibold text-center uppercase">Lista de efectivos activos: </h2>
+      <h2 className="font-semibold text-center uppercase">
+        Lista de efectivos inactivos:{" "}
+      </h2>
       <div className="p-6 w-full">
-        {efectivos.map((ef) => (
+        {efectivosInactivos.map((ef) => (
           <div key={ef.legajo}>
-            <div className="flex md:flex-row gap-2 font-semibold text-lg justify-between my-4">
+            <div className="flex md:flex-row gap-2 font-semibold text-lg justify-between my-4 bg-red-600 p-4 shadow-xl">
               <div>
                 <p>
                   <span className="font-bold">Nombre y apellido: </span>
@@ -78,10 +84,7 @@ export const ListaEfectivos = () => {
           </div>
         ))}
       </div>
-      {
-        msg &&       <Alerta mensaje={mensaje}/>
-
-      }
+      {msg && <Alerta mensaje={mensaje} />}
     </div>
   );
 };
