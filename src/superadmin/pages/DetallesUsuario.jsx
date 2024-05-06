@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { delegaciones } from "../../info";
 import { roles } from "../../info/roles";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Alerta } from "../../utils";
 
 export const DetallesUsuario = () => {
   const url = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate();
   const { legajo } = useParams();
 
   const [efectivoSeleccionado, setEfectivoSeleccionado] = useState({});
@@ -38,6 +39,8 @@ export const DetallesUsuario = () => {
     apellido: "",
     legajo: "",
     delegacion: "",
+    usuario: "",
+    password: "",
     rol: "",
     estado: true,
   });
@@ -52,6 +55,8 @@ export const DetallesUsuario = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    formData.usuario = efectivoSeleccionado.usuario;
+    formData.password = efectivoSeleccionado.password;
 
     if (formData.delegacion[1] == "-" || formData.rol[1] == "-") {
       setMensaje({ error: true, msg: "Seleccione un rol y delegacion" });
@@ -66,7 +71,10 @@ export const DetallesUsuario = () => {
       formData.apellido.trim() === "" ||
       formData.delegacion.trim() === "" ||
       formData.rol.trim() === "" ||
-      formData.legajo.trim() === ""
+      formData.legajo.trim() === "" ||
+      formData.usuario.trim() === "" ||
+      formData.password.trim() === ""
+
     ) {
       setMensaje({ error: true, msg: "No puede haber campos vacios" });
       setTimeout(() => {
@@ -76,8 +84,9 @@ export const DetallesUsuario = () => {
     }
     try {
       console.log(formData);
-      const resp = await axios.post(`${url}/api/v1/usuarios`, formData);
+      const resp = await axios.patch(`${url}/api/v1/usuarios`, formData);
       setMensaje({ error: false, msg: resp.data.mensaje });
+      setMensaje({error: false, msg: "Usuario actualizado correctamente"});
       setTimeout(() => {
         setMensaje({});
         navigate("../admin");
@@ -170,11 +179,11 @@ export const DetallesUsuario = () => {
               viewBox="0 0 100 100"
               preserveAspectRatio="xMidYMid meet"
               height="100"
-              class="absolute  top-1 left-12 fill-green-600 w-10 h-10"
+              className="absolute  top-1 left-12 fill-green-600 w-10 h-10"
             >
               <path
                 d="M50,18A19.9,19.9,0,0,0,30,38v8a8,8,0,0,0-8,8V74a8,8,0,0,0,8,8H70a8,8,0,0,0,8-8V54a8,8,0,0,0-8-8H38V38a12,12,0,0,1,23.6-3,4,4,0,1,0,7.8-2A20.1,20.1,0,0,0,50,18Z"
-                class="svg-fill-primary"
+                className="svg-fill-primary"
               ></path>
             </svg>
 
@@ -186,10 +195,10 @@ export const DetallesUsuario = () => {
               viewBox="0 0 100 100"
               preserveAspectRatio="xMidYMid meet"
               height="100"
-              class="absolute top-1 left-1 fill-red-600  w-10 h-10"
+              className="absolute top-1 left-1 fill-red-600  w-10 h-10"
             >
               <path
-                fill-rule="evenodd"
+              fillRule="evenodd"
                 d="M30,46V38a20,20,0,0,1,40,0v8a8,8,0,0,1,8,8V74a8,8,0,0,1-8,8H30a8,8,0,0,1-8-8V54A8,8,0,0,1,30,46Zm32-8v8H38V38a12,12,0,0,1,24,0Z"
               ></path>
             </svg>
