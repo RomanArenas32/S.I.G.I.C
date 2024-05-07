@@ -5,6 +5,7 @@ import { CargarEventos, VistaEventos } from "../reunion/pages";
 import { Login } from "../auth";
 import { GestionUsuarios } from "../superadmin/GestionUsuarios";
 import { CrearUsuario, DetallesUsuario } from "../superadmin/pages";
+import { PanelReunion } from "../reunion/administrador/PanelReunion";
 
 const logeado = true;
 
@@ -23,6 +24,7 @@ export const AppRoutes = () => {
           <Route path="/*" element={<Navigate to="/" replace />} />
           {/* of. reunion -ADMINISTRADORES */}
           <Route path="/reunion/vista" element={<VistaEventos />} />
+          <Route path="/reunion/formularios" element={<PanelReunion />} />
 
           {/* GESTION DE UAURIOS - SUPERADMINISTRADOR */}
           <Route path="/admin" element={<GestionUsuarios />} />
