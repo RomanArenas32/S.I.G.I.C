@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const AgregarClasificacion = () => {
+export const Clasificacion = () => {
   return (
     <div>AgregarClasificacion</div>
   )
