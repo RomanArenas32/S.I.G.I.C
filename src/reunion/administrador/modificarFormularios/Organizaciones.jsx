@@ -47,7 +47,7 @@ export const Organizaciones = () => {
             <div className="flex flex-row w-full justify-between">
               <p className="text-lg">{or.nombre_organizacion}</p>
               <div>
-                <button className="underline bg-yellow-500 p-1">editar</button>
+                <button className="underline bg-yellow-500 p-1" onClick={()=> navigate(`../reunion/formularios/${or.id_organizacion}`)}>editar</button>
               </div>
             </div>
 
