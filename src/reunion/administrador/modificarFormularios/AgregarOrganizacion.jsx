@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Alerta } from "../../../utils";
+import axios from "axios";
 
 export const AgregarOrganizacion = () => {
+  const url = import.meta.env.VITE_API_URL;
+
   const navigate = useNavigate();
   const [mensaje, setMensaje] = useState({});
   const [formData, setFormData] = useState({
@@ -20,7 +23,6 @@ export const AgregarOrganizacion = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (
       formData.nombre_organizacion.trim() === "" ||
       formData.observacion_organizacion.trim() === ""
@@ -31,11 +33,9 @@ export const AgregarOrganizacion = () => {
       }, 3000);
       return;
     }
-
     try {
-     console.log(formData)
+      console.log(formData);
       const resp = await axios.post(`${url}/api/v1/organizaciones`, formData);
-      
       setMensaje({ error: false, msg: resp.data.mensaje });
       setTimeout(() => {
         setMensaje({});
