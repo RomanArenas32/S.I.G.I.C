@@ -6,6 +6,7 @@ import { Login } from "../auth";
 import { GestionUsuarios } from "../superadmin/GestionUsuarios";
 import { CrearUsuario, DetallesUsuario } from "../superadmin/pages";
 import { PanelReunion } from "../reunion/administrador/PanelReunion";
+import { AgregarOrganizacion, EditarOrganizacion } from "../reunion/administrador/modificarFormularios";
 
 const logeado = true;
 
@@ -25,6 +26,9 @@ export const AppRoutes = () => {
           {/* of. reunion -ADMINISTRADORES */}
           <Route path="/reunion/vista" element={<VistaEventos />} />
           <Route path="/reunion/formularios" element={<PanelReunion />} />
+          <Route path="/reunion/formularios/cargaorg" element={<AgregarOrganizacion />} />
+          <Route path="/reunion/formularios/:id" element={<EditarOrganizacion />} />
+
 
           {/* GESTION DE UAURIOS - SUPERADMINISTRADOR */}
           <Route path="/admin" element={<GestionUsuarios />} />
