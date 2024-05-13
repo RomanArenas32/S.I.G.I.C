@@ -34,7 +34,6 @@ export const AgregarOrganizacion = () => {
       return;
     }
     try {
-      console.log(formData);
       const resp = await axios.post(`${url}/api/v1/organizaciones`, formData);
       setMensaje({ error: false, msg: resp.data.mensaje });
       setTimeout(() => {
@@ -42,7 +41,7 @@ export const AgregarOrganizacion = () => {
         navigate("../reunion/formularios");
       }, 3000);
     } catch (error) {
-      setMensaje({ error: true, msg: "Error al cargar organizacion" });
+      setMensaje({ error: true, msg: error.response.data.message });
       setTimeout(() => {
         setMensaje({});
       }, 3000);

@@ -83,8 +83,7 @@ export const DetallesUsuario = () => {
       return;
     }
     try {
-      console.log(formData);
-      const resp = await axios.patch(`${url}/api/v1/usuarios`, formData);
+      const resp = await axios.patch(`${url}/api/v1/usuarios/edit`, formData);
       setMensaje({ error: false, msg: resp.data.mensaje });
       setMensaje({error: false, msg: "Usuario actualizado correctamente"});
       setTimeout(() => {
@@ -92,7 +91,7 @@ export const DetallesUsuario = () => {
         navigate("../admin");
       }, 3000);
     } catch (error) {
-      setMensaje({ error: true, msg: error.response.data.message });
+      setMensaje({ error: true, msg: "Error al actualizar el usuario" });
       setTimeout(() => {
         setMensaje({});
       }, 3000);
@@ -107,7 +106,7 @@ export const DetallesUsuario = () => {
         Editar efectivo
       </h2>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} >
         <div className="flex flex-col gap-5 md:flex-row">
           <div className="flex flex-col">
             <input
