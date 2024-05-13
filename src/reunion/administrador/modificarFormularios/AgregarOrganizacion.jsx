@@ -57,7 +57,7 @@ export const AgregarOrganizacion = () => {
         Registre una organizacion
       </h2>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="w-3/5">
         <div className="flex flex-col">
           <input
             className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
