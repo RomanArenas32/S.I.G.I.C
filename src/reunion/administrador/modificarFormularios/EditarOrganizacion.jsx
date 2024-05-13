@@ -17,6 +17,11 @@ export const EditarOrganizacion = () => {
           `${url}/api/v1/organizaciones/obtener/${id}`
         );
         setOrganizacionSelec(resp.data);
+        setFormData({
+          ...formData,
+          nombre_organizacion: resp.data.nombre_organizacion,
+          observacion_organizacion: resp.data.observacion_organizacion,
+        });
       } catch (error) {
         console.log(error);
         setMensaje({
@@ -28,7 +33,7 @@ export const EditarOrganizacion = () => {
 
     obtenerOrgPorId();
   }, []);
-  console.log(organizacionSelec);
+
   const [formData, setFormData] = useState({
     nombre_organizacion: "",
     observacion_organizacion: "",
@@ -56,7 +61,7 @@ export const EditarOrganizacion = () => {
     }
     try {
       console.log(formData);
-      const resp = await axios.post(`${url}/api/v1/organizaciones`, formData);
+      const resp = await axios.patch(`${url}/api/v1/organizaciones`, formData);
       setMensaje({ error: false, msg: resp.data.mensaje });
       setTimeout(() => {
         setMensaje({});
@@ -78,7 +83,7 @@ export const EditarOrganizacion = () => {
         Editar organizacion
       </h2>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="w-3/5 " >
         <div className="flex flex-col">
           <input
             className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
@@ -103,7 +108,7 @@ export const EditarOrganizacion = () => {
           className="w-full my-2 bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150"
           type="submit"
         >
-          Registrar organizacion
+          Guardar Cambios
         </button>
         {msg && <Alerta mensaje={mensaje} />}
       </form>
