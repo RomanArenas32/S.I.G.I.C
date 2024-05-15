@@ -29,8 +29,6 @@ export const Organizaciones = () => {
     obtenerOrganizaciones();
   }, []);
 
-  
-
   const { msg } = mensaje;
   return (
     <div className="flex flex-col gap-4">
@@ -47,7 +45,7 @@ export const Organizaciones = () => {
             <div className="flex flex-row w-full justify-between">
               <p className="text-lg">{or.nombre_organizacion}</p>
               <div>
-                <button className="underline bg-yellow-500 p-1" onClick={()=> navigate(`../reunion/formularios/${or.id_organizacion}`)}>editar</button>
+                <button className="underline bg-yellow-500 p-1" onClick={()=> navigate(`../reunion/formularios/${or.id}`)}>editar</button>
               </div>
             </div>
 
