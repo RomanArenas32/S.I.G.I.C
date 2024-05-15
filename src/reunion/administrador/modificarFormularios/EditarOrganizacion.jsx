@@ -7,6 +7,7 @@ export const EditarOrganizacion = () => {
   const url = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const { id } = useParams();
+
   const [organizacionSelec, setOrganizacionSelec] = useState({});
   const [mensaje, setMensaje] = useState({});
 
@@ -14,11 +15,12 @@ export const EditarOrganizacion = () => {
     const obtenerOrgPorId = async () => {
       try {
         const resp = await axios.get(
-          `${url}/api/v1/organizaciones/obtener/${id}`
+          `${url}/api/v1/organizaciones/selec/${id}`
         );
         setOrganizacionSelec(resp.data);
         setFormData({
           ...formData,
+          id: resp.data.id,
           nombre_organizacion: resp.data.nombre_organizacion,
           observacion_organizacion: resp.data.observacion_organizacion,
         });
@@ -35,6 +37,7 @@ export const EditarOrganizacion = () => {
   }, []);
 
   const [formData, setFormData] = useState({
+    id: "",
     nombre_organizacion: "",
     observacion_organizacion: "",
   });
@@ -60,15 +63,18 @@ export const EditarOrganizacion = () => {
       return;
     }
     try {
-      console.log(formData);
-      const resp = await axios.patch(`${url}/api/v1/organizaciones`, formData);
-      setMensaje({ error: false, msg: resp.data.mensaje });
+      const resp = await axios.patch(
+        `${url}/api/v1/organizaciones/edit`,
+        formData
+      );
+      setMensaje({ error: false, msg: "Actualizacion exitosa!" });
       setTimeout(() => {
         setMensaje({});
         navigate("../reunion/formularios");
       }, 3000);
     } catch (error) {
-      setMensaje({ error: true, msg: "Error al cargar organizacion" });
+      console.log(error);
+      setMensaje({ error: true, msg: "Error al editar organizacion" });
       setTimeout(() => {
         setMensaje({});
       }, 3000);
@@ -83,7 +89,7 @@ export const EditarOrganizacion = () => {
         Editar organizacion
       </h2>
 
-      <form onSubmit={handleSubmit} className="w-3/5 " >
+      <form onSubmit={handleSubmit} className="w-3/5 ">
         <div className="flex flex-col">
           <input
             className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
