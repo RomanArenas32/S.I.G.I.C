@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ListaEfectivos, ListaEfectivosInactivos } from "./pages";
 import { useState } from "react";
+import { BotonVolver } from "../utils";
 
 export const GestionUsuarios = () => {
   const [mostrarLista, setMostrarLista] = useState(false);
@@ -15,7 +16,9 @@ export const GestionUsuarios = () => {
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen">
+    <>
+    <BotonVolver/>
+     <div className="flex flex-col items-center min-h-screen">
       <div className="my-6">
         <h2 className="text-4xl mb-4 font-bold text-center">
           Bienvenido a la gestión de usuarios
@@ -45,5 +48,7 @@ export const GestionUsuarios = () => {
       {mostrarLista && <ListaEfectivos />}
       {mostrarListaInactivos && <ListaEfectivosInactivos />}
     </div>
+    </>
+   
   );
 };

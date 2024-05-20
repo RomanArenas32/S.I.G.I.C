@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   delegaciones,
   eventoPorTipo,
@@ -6,6 +6,8 @@ import {
   partidos,
   conflictividad,
 } from "../../info";
+import axios from "axios";
+import { BotonVolver } from "../../utils";
 
 //ordenamiento de los partidos alfabeticamente
 const partidosOrdenados = {};
@@ -15,11 +17,13 @@ Object.keys(partidos)
     partidosOrdenados[partido] = partidos[partido];
   });
 
-
 export const CargarEventos = () => {
+  const url = import.meta.env.VITE_API_URL;
+
   const [image, setImage] = useState(null);
   const [organizaciones, setOrganizaciones] = useState([]);
   const [partidoSeleccionado, setPartidoSeleccionado] = useState("");
+  const [org, setOrg] = useState([]);
 
   const formatearOrganizaciones = (organizacion) => {
     const arrayOrganizaciones = organizacion.split("-");
@@ -39,11 +43,12 @@ export const CargarEventos = () => {
     fecha: "",
     hora: "",
     coordenadas: "",
-    entidad: "",
+    lugar: "",
     barrio: "",
     conflictividad: "",
     banner: image,
     organizaciones: organizaciones,
+    org: "",
   });
 
   formData.organizaciones = organizaciones;
@@ -67,7 +72,18 @@ export const CargarEventos = () => {
     console.log(formData);
   };
 
+  //OBTENER LAS ORG CUANDO CARGE LA PAGINA
+  useEffect(() => {
+    const obtenerOrg = async () => {
+      const resp = await axios.get(`${url}/api/v1/organizaciones`);
+      setOrg(resp.data);
+    };
+    obtenerOrg();
+  }, []);
+
   return (
+    <>
+    <BotonVolver/>
     <div className=" bg-gray-800 rounded-lg shadow-2xl p-2 grid place-items-center my-4 md:mx-6">
       <h2 className="text-2xl font-bold text-gray-200 mb-4 uppercase pb-2">
         Carga de eventos
@@ -94,7 +110,9 @@ export const CargarEventos = () => {
               onChange={(e) => setPartidoSeleccionado(e.target.value)}
               className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
             >
-              <option value={formData.partido} id="partido">--Seleccione un partido--</option>
+              <option value={formData.partido} id="partido">
+                --Seleccione un partido--
+              </option>
               {Object.keys(partidosOrdenados).map((partido) => (
                 <option key={partido} value={partido}>
                   {partido}
@@ -104,8 +122,8 @@ export const CargarEventos = () => {
 
             <select
               id="localidad"
-              value={formData.localidad} 
-              onChange={handleInputChange} 
+              value={formData.localidad}
+              onChange={handleInputChange}
               className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
             >
               <option value="">--Seleccione una localidad--</option>
@@ -203,9 +221,9 @@ export const CargarEventos = () => {
               placeholder="lugar o entidad. ej: Ministerio de trabajo"
               className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
               type="text"
-              id="entidad"
+              id="lugar"
               onChange={handleInputChange}
-              value={formData.entidad}
+              value={formData.lugar}
             />
             <input
               placeholder="Indique barrio donde transcurrirá el evento"
@@ -215,6 +233,21 @@ export const CargarEventos = () => {
               onChange={handleInputChange}
               value={formData.barrio}
             />
+
+            {/* ORGANIZACIONES: LA QUE QUEDA ES LA DE ARRIBA */}
+
+            <select
+              className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+              id="org"
+              onChange={handleInputChange}
+              value={formData.org}
+            >
+              {org.map((org) => (
+                <option className="font-semibold" key={org.id}>
+                  {org.nombre_organizacion}
+                </option>
+              ))}
+            </select>
             <textarea
               placeholder="ORGANIZACIONES SOCIALES, SINDICATOS ETC - Separados cada un guion"
               className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
@@ -222,9 +255,9 @@ export const CargarEventos = () => {
               onChange={(e) => formatearOrganizaciones(e.target.value)}
             ></textarea>
             <select
-              id="responsable"
+              id="conflictividad"
               onChange={handleInputChange}
-              value={formData.responsable}
+              value={formData.conflictividad}
               className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
             >
               {conflictividad.map((c) => (
@@ -261,5 +294,7 @@ export const CargarEventos = () => {
         </button>
       </form>
     </div>
+    </>
+    
   );
 };

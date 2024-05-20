@@ -2,7 +2,7 @@ import { useState } from "react";
 import { delegaciones } from "../../info";
 import { roles } from "../../info/roles";
 import axios from "axios";
-import { Alerta } from "../../utils";
+import { Alerta, BotonVolver } from "../../utils";
 import { useNavigate } from "react-router-dom";
 
 const url = import.meta.env.VITE_API_URL;
@@ -75,7 +75,9 @@ export const CrearUsuario = () => {
 
   const { msg } = mensaje;
   return (
-    <div className=" bg-gray-800 rounded-lg shadow-2xl p-2 grid place-items-center my-4 md:mx-6">
+    <>
+    <BotonVolver/>
+      <div className=" bg-gray-800 rounded-lg shadow-2xl p-2 grid place-items-center my-4 md:mx-6">
       <h2 className="text-2xl font-bold text-gray-200 mb-4 uppercase pb-2">
         Registre un efectivo
       </h2>
@@ -145,5 +147,7 @@ export const CrearUsuario = () => {
         {msg && <Alerta mensaje={mensaje} />}
       </form>
     </div>
+    </>
+  
   );
 };
