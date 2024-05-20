@@ -7,6 +7,7 @@ import {
   conflictividad,
 } from "../../info";
 import axios from "axios";
+import { BotonVolver } from "../../utils";
 
 //ordenamiento de los partidos alfabeticamente
 const partidosOrdenados = {};
@@ -81,6 +82,8 @@ export const CargarEventos = () => {
   }, []);
 
   return (
+    <>
+    <BotonVolver/>
     <div className=" bg-gray-800 rounded-lg shadow-2xl p-2 grid place-items-center my-4 md:mx-6">
       <h2 className="text-2xl font-bold text-gray-200 mb-4 uppercase pb-2">
         Carga de eventos
@@ -291,5 +294,7 @@ export const CargarEventos = () => {
         </button>
       </form>
     </div>
+    </>
+    
   );
 };

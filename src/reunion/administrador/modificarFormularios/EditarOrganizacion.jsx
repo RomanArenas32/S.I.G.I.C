@@ -82,9 +82,60 @@ export const EditarOrganizacion = () => {
     }
   };
 
+  const eliminarOrganizacion = async () => {
+    const confirmacion = confirm(
+      "¿Estás seguro de que deseas eliminar esta organización?"
+    );
+
+    if (confirmacion) {
+      try {
+        const resp = await axios.delete(`${url}/api/v1/organizaciones/${id}`);
+        setMensaje({ error: false, msg: resp.data.mensaje });
+        setTimeout(() => {
+          setMensaje({});
+        }, 1000);
+        setTimeout(() => {
+          navigate("../reunion/formularios");
+        }, 1300);
+      } catch (error) {
+        setMensaje({
+          error: true,
+          msg: "La organizacion no pudo ser eliminada, intente nuevamente",
+        });
+        setTimeout(() => {
+          setMensaje({});
+        }, 1500);
+      }
+    } else {
+      alert("Operación cancelada");
+    }
+  };
+
   const { msg } = mensaje;
   return (
     <div className=" bg-gray-800 rounded-lg shadow-2xl p-2 grid place-items-center my-4 md:mx-6">
+      <div className="w-full p-2 flex justify-end">
+        <button
+          onClick={() => eliminarOrganizacion()}
+          className="inline-flex items-center px-4 py-2 bg-red-600 transition ease-in-out delay-75 hover:bg-red-700 text-white text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110"
+        >
+          <svg
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="h-5 w-5 mr-2"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+              strokeWidth="2"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+            ></path>
+          </svg>
+          Eliminar esta organizacion
+        </button>
+      </div>
       <h2 className="text-2xl font-bold text-gray-200 mb-4 uppercase pb-2">
         Editar organizacion
       </h2>
