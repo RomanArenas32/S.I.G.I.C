@@ -30,11 +30,8 @@ export const EditarMotivoEvento = () => {
 
     obtenerOrgPorId();
   }, []);
-  console.log(motivoSelec);
   const [formData, setFormData] = useState({
-    id: "",
-    nombre_organizacion: "",
-    observacion_organizacion: "",
+    motivo: ""
   });
 
   const handleInputChange = (e) => {
@@ -57,7 +54,7 @@ export const EditarMotivoEvento = () => {
       return;
     }
     try {
-      const resp = await axios.patch(
+      const resp = await axios.put(
         `${url}/api/v1/motivoevento/edit`,
         formData
       );
