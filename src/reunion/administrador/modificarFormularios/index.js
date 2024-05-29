@@ -1,4 +1,6 @@
 export * from './Organizaciones';
-export * from './Clasificacion';
+export * from './MotivosEventos';
 export * from './AgregarOrganizacion';
 export * from './EditarOrganizacion';
+export * from './AgregarMotivoEvento';
+export * from './EditarMotivoEvento';

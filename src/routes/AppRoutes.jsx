@@ -2,13 +2,13 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import { Home } from "../pages";
 import { ReunionApp } from "../reunion";
 import { CargarEventos, VistaEventos } from "../reunion/pages";
-import { Login } from "../auth";
+import { CrearPassword, Login } from "../auth";
 import { GestionUsuarios } from "../superadmin/GestionUsuarios";
 import { CrearUsuario, DetallesUsuario } from "../superadmin/pages";
 import { PanelReunion } from "../reunion/administrador/PanelReunion";
-import { AgregarOrganizacion, EditarOrganizacion } from "../reunion/administrador/modificarFormularios";
+import { AgregarMotivoEvento, AgregarOrganizacion, EditarMotivoEvento, EditarOrganizacion } from "../reunion/administrador/modificarFormularios";
 
-const logeado = true;
+const logeado = false;
 
 
 
@@ -27,10 +27,14 @@ export const AppRoutes = () => {
           <Route path="/reunion/vista" element={<VistaEventos />} />
           <Route path="/reunion/formularios" element={<PanelReunion />} />
           <Route path="/reunion/formularios/cargaorg" element={<AgregarOrganizacion />} />
+          <Route path="/reunion/formularios/cargamotev" element={<AgregarMotivoEvento />} />
           <Route path="/reunion/formularios/:id" element={<EditarOrganizacion />} />
+          <Route path="/reunion/formularios/ev/:id" element={<EditarMotivoEvento />} />
+
+          
 
 
-          {/* GESTION DE UAURIOS - SUPERADMINISTRADOR */}
+          {/* GESTION DE USUARIOS - SUPERADMINISTRADOR */}
           <Route path="/admin" element={<GestionUsuarios />} />
           <Route path="/admin/createus" element={<CrearUsuario />} />
           <Route path="/admin/usuarios/:legajo" element={<DetallesUsuario />} />
@@ -39,6 +43,8 @@ export const AppRoutes = () => {
         <>
           <Route path="/login" element={<Login />} />
           <Route path="/*" element={<Navigate to="/login" replace />} />
+          //CAMBIO DE PASSWORD AL PRIMER INGRESO
+          <Route path="/replace" element={<CrearPassword />} />
         </>
       )}
     </Routes>

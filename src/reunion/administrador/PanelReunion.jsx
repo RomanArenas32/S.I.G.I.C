@@ -1,5 +1,5 @@
 import {  useState } from "react";
-import { Organizaciones, Clasificacion  } from "./modificarFormularios";
+import { Organizaciones,  MotivosEventos  } from "./modificarFormularios";
 import { BotonVolver } from "../../utils";
 
 
@@ -24,7 +24,7 @@ export const PanelReunion = () => {
       </div>
       <div className="md:px-10">
       {
-        tipoEvento && <Clasificacion/>
+        tipoEvento && <MotivosEventos/>
       }
       {
         organizaciones &&  <Organizaciones/>

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import {  useState } from "react"
 import { Menu } from "./Menu"
 
 export const MenuHamburguesa = () => {
@@ -9,8 +9,7 @@ export const MenuHamburguesa = () => {
     const handleShowMenu = () => {
         setShowMenu(!showMenu)
     }
-
-
+ 
 
     return (
         <div className="md:hidden p-4">
@@ -27,7 +26,7 @@ export const MenuHamburguesa = () => {
                     </div>
 
             }
-
+           
         </div>
     )
 }
