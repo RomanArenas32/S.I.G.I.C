@@ -24,31 +24,17 @@ export const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
     try {
       const { data } = await axios.post(`${url}/api/v1/authenticate`, formData);
-      handleSuccessfulLogin(data);
+      setMensaje({ msg: "Login exitoso!", error: false });
+      setTimeout(() => {
+        navigate("/replace");
+      }, 2000);
     } catch (error) {
-      handleLoginError(error);
-    }
-  };
-  
-  const handleSuccessfulLogin = (data) => {
-    setMensaje({ msg: "Login exitoso!", error: false });
-    localStorage.setItem("usuario", JSON.stringify(data)); // Guardar como string JSON
-    navigateUser(data);
-  };
-  
-  const handleLoginError = (error) => {
-    console.error("Error al iniciar sesión:", error);
-    setMensaje({ msg: "Error al iniciar sesión. Verifique sus credenciales e intente nuevamente.", error: true });
-  };
-  
-  const navigateUser = (data) => {
-    if (data.legajo === data.password) {
-      navigate("/replace");
-    } else {
-      navigate("/");
+      setMensaje({
+        msg: "Error al iniciar sesión. Verifique sus credenciales e intente nuevamente.",
+        error: true,
+      });
     }
   };
 

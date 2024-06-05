@@ -8,7 +8,7 @@ import { CrearUsuario, DetallesUsuario } from "../superadmin/pages";
 import { PanelReunion } from "../reunion/administrador/PanelReunion";
 import { AgregarMotivoEvento, AgregarOrganizacion, EditarMotivoEvento, EditarOrganizacion } from "../reunion/administrador/modificarFormularios";
 
-const logeado = false;
+const logeado = true;
 
 
 

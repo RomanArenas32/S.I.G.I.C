@@ -41,7 +41,6 @@ export const CrearPassword = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
     if (formData.password.trim() === "") {
       setMensaje({ error: true, msg: "No puede haber campos vacios" });
       setTimeout(() => {
