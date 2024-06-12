@@ -18,7 +18,7 @@ export const CrearUsuario = () => {
     delegacion: "",
     usuario: "",
     password: "",
-    rol: "",
+    rol: "USER_ROLE",
     estado: true,
   });
 
@@ -57,6 +57,7 @@ export const CrearUsuario = () => {
     formData.usuario = `${formData.apellido.toUpperCase()}${formData.legajo}`;
     formData.password = `${formData.legajo}`;
     try {
+   
       const resp = await axios.post(`${url}/api/v1/usuarios`, formData);
       setMensaje({error: false, msg: resp.data.mensaje});
       setTimeout(() => {
