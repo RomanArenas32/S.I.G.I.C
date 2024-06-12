@@ -81,10 +81,9 @@ export const CrearPassword = () => {
     <>
       <BotonVolver />
       <div className="grid place-items-center items-center h-full my-4">
-        <div className="text-lg text-center mb-4 font-semibold">
+        <div className="text-lg text-center mb-4 font-bold">
           <h2>Hola {usuarioLogeado.nombre}!</h2>
-          <h3>Completa el formulario a continuacion</h3>
-          <h3>Si deseas cambiar tu contraseña</h3>
+          <h3>Si es tu primer ingreso deberás cambiar la contraseña</h3>
         </div>
 
         <div className="bg-gray-900 border-4 border-blue-900 rounded-2xl hover:border-blue-500 transition-all duration-200 shadow-2xl">
@@ -117,10 +116,11 @@ export const CrearPassword = () => {
                 Guardar cambios
               </button>
 
-              {msg && <Alerta mensaje={mensaje} />}
             </form>
           </div>
         </div>
+                      {msg && <Alerta mensaje={mensaje} />}
+
       </div>
     </>
   );

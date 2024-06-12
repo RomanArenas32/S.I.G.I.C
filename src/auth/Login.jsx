@@ -26,22 +26,30 @@ export const Login = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(`${url}/api/v1/authenticate`, formData);
+      console.log(data)
+      if(formData.password === data.user.legajo){
+        navigate("/replace");
+        return
+      }
       setMensaje({ msg: "Login exitoso!", error: false });
       setTimeout(() => {
-        navigate("/replace");
+        navigate("/");
       }, 2000);
     } catch (error) {
       setMensaje({
         msg: "Error al iniciar sesión. Verifique sus credenciales e intente nuevamente.",
         error: true,
       });
+      setTimeout(() => {
+        setMensaje({})
+      }, 2000);
     }
   };
 
   const { msg } = mensaje;
 
   return (
-    <div className="grid place-items-center items-center h-full my-32">
+    <div className="grid place-items-center items-start h-full my-8">
       <div className="bg-gray-900 border-4 border-blue-900 rounded-2xl hover:border-blue-500 transition-all duration-200 shadow-2xl">
         <div className="mx-auto flex items-center space-y-4 py-16 px-12 font-semibold text-gray-500 flex-col">
           <Logo estilos={"w-24"} />
@@ -72,11 +80,11 @@ export const Login = () => {
             >
               Ingresar
             </button>
-
-            {msg && <Alerta mensaje={mensaje} />}
           </form>
         </div>
+        
       </div>
+      {msg && <Alerta mensaje={mensaje} />}
     </div>
   );
 };

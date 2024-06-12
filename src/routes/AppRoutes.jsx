@@ -8,14 +8,14 @@ import { CrearUsuario, DetallesUsuario } from "../superadmin/pages";
 import { PanelReunion } from "../reunion/administrador/PanelReunion";
 import { AgregarMotivoEvento, AgregarOrganizacion, EditarMotivoEvento, EditarOrganizacion } from "../reunion/administrador/modificarFormularios";
 
-const logeado = true;
+const logeado = false;
 
 
 
 export const AppRoutes = () => {
   return (
     <Routes>
-      {logeado ? (
+
         <>
           <Route path="/" element={<Home />} />
 
@@ -39,14 +39,14 @@ export const AppRoutes = () => {
           <Route path="/admin/createus" element={<CrearUsuario />} />
           <Route path="/admin/usuarios/:legajo" element={<DetallesUsuario />} />
         </>
-      ) : (
+
         <>
           <Route path="/login" element={<Login />} />
           <Route path="/*" element={<Navigate to="/login" replace />} />
           //CAMBIO DE PASSWORD AL PRIMER INGRESO
           <Route path="/replace" element={<CrearPassword />} />
         </>
-      )}
+      
     </Routes>
   );
 };
