@@ -34,7 +34,7 @@ export const Login = () => {
       setMensaje({ msg: "Login exitoso!", error: false });
       setTimeout(() => {
         navigate("/");
-      }, 2000);
+      }, 1500);
     } catch (error) {
       setMensaje({
         msg: "Error al iniciar sesión. Verifique sus credenciales e intente nuevamente.",

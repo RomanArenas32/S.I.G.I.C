@@ -7,7 +7,7 @@ import AuthContext from "../context/AuthProvider";
 
 export const Profile = () => {
   const { usuarioAuth } = useContext(AuthContext);
-console.log(usuarioAuth)
+
   const { rol, estado } = usuarioAuth;
 
   return (
