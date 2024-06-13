@@ -14,7 +14,6 @@ export const CrearPassword = () => {
 
   const navigate = useNavigate();
   const [repetirPass, setRepetirPass] = useState("");
-  const [usuarioLogeado, setUsuarioLogeado] = useState({});
   const [formData, setFormData] = useState({
     legajo: usuarioAuth.legajo,
     password: "",
