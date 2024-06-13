@@ -10,7 +10,6 @@ export const CrearPassword = () => {
 
   const { usuarioAuth } = useContext(AuthContext);
 
-  console.log(usuarioAuth);
 
   const navigate = useNavigate();
   const [repetirPass, setRepetirPass] = useState("");

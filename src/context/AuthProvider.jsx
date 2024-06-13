@@ -4,9 +4,6 @@ const url = import.meta.env.VITE_API_URL;
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  console.log(url)
-
-
   const [usuarioAuth, setUsuarioAuth] = useState({});
 
   useEffect(() => {
