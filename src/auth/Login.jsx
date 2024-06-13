@@ -26,7 +26,7 @@ export const Login = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(`${url}/api/v1/authenticate`, formData);
-      console.log(data)
+      localStorage.setItem('token', data.token);
       if(formData.password === data.user.legajo){
         navigate("/replace");
         return

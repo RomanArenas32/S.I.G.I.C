@@ -1,34 +1,39 @@
-import { createContext,  useState } from "react";
-
+import axios from "axios";
+import { createContext,  useEffect,  useState } from "react";
+const url = import.meta.env.VITE_API_URL;
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+  console.log(url)
+
 
   const [usuarioAuth, setUsuarioAuth] = useState({});
 
- /* useEffect(() => {
+  useEffect(() => {
     const autenticarUsuario = async () => {
       const token = localStorage.getItem('token');
       if (!token) return;
-
       try {
         const config = {
           headers: {
-            "token": `${token}`
+            "Authorization": `Bearer ${token}`
           }
         };
-        const { data } = await clienteAxios.get('usuarios/perfil', config);
-        setUsuarioAuth(data.usuario);
+        const { data } = await axios.get(`${url}/api/v1/authenticate/profile`, config);
+        setUsuarioAuth(data);
 
       } catch (error) {
-        console.log(error)
-        console.log(error.response.data.msg);
+        console.log(error);
+        if (error.response) {
+          console.log(error.response.data.msg);
+        }
       }
     };
 
     autenticarUsuario();
   }, []);
-*/
+
+  console.log(usuarioAuth)
 
   return (
     <AuthContext.Provider
