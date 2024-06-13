@@ -66,7 +66,8 @@ export const CrearUsuario = () => {
       }, 3000);
 
     } catch (error) {
-      setMensaje({ error: true, msg: error.response.data.message });
+      console.log(error)
+      setMensaje({ error: true, msg: "Error al crear el usuario" });
       setTimeout(() => {
         setMensaje({});
       }, 3000);
