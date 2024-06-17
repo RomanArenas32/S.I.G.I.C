@@ -1,36 +1,35 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Alerta, BotonVolver } from "../utils";
 import { Logo } from "../utilidades/Logo";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import AuthContext from "../context/AuthProvider";
 
 export const CrearPassword = () => {
   const url = import.meta.env.VITE_API_URL;
+
+  const { usuarioAuth } = useContext(AuthContext);
+
+
   const navigate = useNavigate();
   const [repetirPass, setRepetirPass] = useState("");
-  const [usuarioLogeado, setUsuarioLogeado] = useState({});
-  const[formData, setFormData] = useState({
-    legajo: "",
+  const [formData, setFormData] = useState({
+    legajo: usuarioAuth.legajo,
     password: "",
   });
   const [mensaje, setMensaje] = useState({});
 
   useEffect(() => {
-    const usuarioString = localStorage.getItem("usuario");
-    const usuario = usuarioString ? JSON.parse(usuarioString) : null;
-    if (!usuario) {
+    if (!usuarioAuth) {
       return;
     }
-    if (usuario) {
-        setUsuarioLogeado(usuario);
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          legajo: usuario.legajo,
-        }));
-      }
-    setUsuarioLogeado(usuario);
-  }, []);
-  
+    if (usuarioAuth) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        legajo: usuarioAuth.legajo,
+      }));
+    }
+  }, [usuarioAuth]);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -41,6 +40,7 @@ export const CrearPassword = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData)
     if (formData.password.trim() === "") {
       setMensaje({ error: true, msg: "No puede haber campos vacios" });
       setTimeout(() => {
@@ -62,7 +62,7 @@ export const CrearPassword = () => {
       );
       setMensaje({ error: false, msg: "Usuario actualizado correctamente" });
       setTimeout(() => {
-        navigate('/')
+        navigate("/");
       }, 1000);
     } catch (error) {
       console.log(error);
@@ -115,12 +115,10 @@ export const CrearPassword = () => {
               >
                 Guardar cambios
               </button>
-
             </form>
           </div>
         </div>
-                      {msg && <Alerta mensaje={mensaje} />}
-
+        {msg && <Alerta mensaje={mensaje} />}
       </div>
     </>
   );
