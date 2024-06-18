@@ -54,6 +54,7 @@ export const AppRoutes = () => {
             element={<EditarMotivoEvento />}
           />
           <Route path="/*" element={<Navigate to="/" replace />} />
+          <Route path="/replace" element={<CrearPassword />} />
         </Routes>
       );
     }
@@ -97,6 +98,7 @@ export const AppRoutes = () => {
       return (
         <Routes>
           {/* Rutas para USER_ROLE */}
+          <Route path="/replace" element={<CrearPassword />} />
           <Route path="/reunion" element={<ReunionApp />} />
           <Route path="/reunion/cargareventos" element={<CargarEventos />} />
           <Route path="/*" element={<Navigate to="/" replace />} />
