@@ -21,19 +21,20 @@ export const AppRoutes = () => {
 
   console.log(rol, estado);
 
-  return (
-    <Routes>
-      {estado ? (
-        <>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Navigate to="/" replace />} />
-
-
-          {/* of.reunion */}
+  if (rol === undefined) {
+    return (
+      <Routes>
+        <Route path="/*" element={<Navigate to="/login" replace />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    );
+  } else {
+    if (rol === "ADMIN_ROLE") {
+      return (
+        <Routes>
+          {/* Rutas para ADMIN_ROLE */}
           <Route path="/reunion" element={<ReunionApp />} />
           <Route path="/reunion/cargareventos" element={<CargarEventos />} />
-          <Route path="/*" element={<Navigate to="/" replace />} />
-          {/* of. reunion -ADMINISTRADORES */}
           <Route path="/reunion/vista" element={<VistaEventos />} />
           <Route path="/reunion/formularios" element={<PanelReunion />} />
           <Route
@@ -52,21 +53,57 @@ export const AppRoutes = () => {
             path="/reunion/formularios/ev/:id"
             element={<EditarMotivoEvento />}
           />
+          <Route path="/*" element={<Navigate to="/" replace />} />
+        </Routes>
+      );
+    }
 
-          {/* GESTION DE USUARIOS - SUPERADMINISTRADOR */}
+    if (rol === "SUPERADMIN_ROLE") {
+      return (
+        <Routes>
+          {/* Rutas para SUPERADMIN_ROLE */}
           <Route path="/admin" element={<GestionUsuarios />} />
           <Route path="/admin/createus" element={<CrearUsuario />} />
           <Route path="/admin/usuarios/:legajo" element={<DetallesUsuario />} />
-        </>
-      ) : (
-        <>
-          <Route path="/login" element={<Login />} />
-          <Route path="/*" element={<Navigate to="/login" replace />} />
-          //CAMBIO DE PASSWORD AL PRIMER INGRESO
-          <Route path="/replace" element={<CrearPassword />} />
-        </>
-      )}
+          <Route path="/reunion/vista" element={<VistaEventos />} />
+          <Route path="/*" element={<Navigate to="/admin" replace />} />
 
-    </Routes>
-  );
+          {/* Rutas para ADMIN_ROLE */}
+          <Route path="/reunion" element={<ReunionApp />} />
+          <Route path="/reunion/cargareventos" element={<CargarEventos />} />
+          <Route path="/reunion/vista" element={<VistaEventos />} />
+          <Route path="/reunion/formularios" element={<PanelReunion />} />
+          <Route
+            path="/reunion/formularios/cargaorg"
+            element={<AgregarOrganizacion />}
+          />
+          <Route
+            path="/reunion/formularios/cargamotev"
+            element={<AgregarMotivoEvento />}
+          />
+          <Route
+            path="/reunion/formularios/:id"
+            element={<EditarOrganizacion />}
+          />
+          <Route
+            path="/reunion/formularios/ev/:id"
+            element={<EditarMotivoEvento />}
+          />
+        </Routes>
+      );
+    }
+
+    if (rol === "USER_ROLE") {
+      return (
+        <Routes>
+          {/* Rutas para USER_ROLE */}
+          <Route path="/reunion" element={<ReunionApp />} />
+          <Route path="/reunion/cargareventos" element={<CargarEventos />} />
+          <Route path="/*" element={<Navigate to="/" replace />} />
+        </Routes>
+      );
+    }
+  }
+
+  return null;
 };

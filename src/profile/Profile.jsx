@@ -20,7 +20,7 @@ export const Profile = () => {
       <div className="flex flex-col md:flex-row items-center gap-6">
         <DarkMode />
         {estado && <BotonCerrarSesion />}
-        {rol == "ADMIN_ROLE" && <BotonAdministrador />}
+        {rol == "SUPERADMIN_ROLE" && <BotonAdministrador />}
       </div>
     </div>
   );
