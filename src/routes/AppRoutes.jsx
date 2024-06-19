@@ -19,8 +19,6 @@ export const AppRoutes = () => {
   const { usuarioAuth } = useContext(AuthContext);
   const { rol, estado } = usuarioAuth;
 
-  console.log(rol, estado);
-
   if (rol === undefined) {
     return (
       <Routes>
@@ -33,6 +31,7 @@ export const AppRoutes = () => {
       return (
         <Routes>
           {/* Rutas para ADMIN_ROLE */}
+          <Route path="/" element={<Home />} />
           <Route path="/reunion" element={<ReunionApp />} />
           <Route path="/reunion/cargareventos" element={<CargarEventos />} />
           <Route path="/reunion/vista" element={<VistaEventos />} />

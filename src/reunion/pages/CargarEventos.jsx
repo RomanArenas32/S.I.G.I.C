@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import AuthContext from "../../context/AuthProvider";
+
 import {
   delegaciones,
   eventoPorTipo,
@@ -19,6 +21,11 @@ Object.keys(partidos)
 
 export const CargarEventos = () => {
   const url = import.meta.env.VITE_API_URL;
+
+
+  const { usuarioAuth } = useContext(AuthContext);
+
+  const {id, nombre, apellido, estado, rol, delegacion} = usuarioAuth;
 
   const [image, setImage] = useState(null);
   const [organizaciones, setOrganizaciones] = useState([]);
@@ -48,7 +55,8 @@ export const CargarEventos = () => {
     conflictividad: "",
     banner: image,
     organizaciones: organizaciones,
-    org: "",
+    org: [],
+    usuarioAuth
   });
 
   formData.organizaciones = organizaciones;
@@ -248,12 +256,7 @@ export const CargarEventos = () => {
                 </option>
               ))}
             </select>
-            <textarea
-              placeholder="ORGANIZACIONES SOCIALES, SINDICATOS ETC - Separados cada un guion"
-              className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
-              type="text"
-              onChange={(e) => formatearOrganizaciones(e.target.value)}
-            ></textarea>
+       
             <select
               id="conflictividad"
               onChange={handleInputChange}
