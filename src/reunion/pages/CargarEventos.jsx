@@ -10,6 +10,7 @@ import {
 } from "../../info";
 import axios from "axios";
 import { Alerta, BotonVolver } from "../../utils";
+import { useNavigate } from "react-router-dom";
 
 //ordenamiento de los partidos alfabeticamente
 const partidosOrdenados = {};
@@ -27,6 +28,7 @@ export const CargarEventos = () => {
   const [partidoSeleccionado, setPartidoSeleccionado] = useState("");
   const [mensaje, setMensaje] = useState({});
   const [org, setOrg] = useState([]);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     responsable: "",
@@ -92,8 +94,9 @@ export const CargarEventos = () => {
       setMensaje({error: false, msg:"Evento creado correctamente"});
       setTimeout(() => {
         setMensaje({})
+        navigate("../reunion")
       }, 1500);
-      console.log(resp)
+      
     } catch (error) {
       setMensaje({error: true, msg: "El evento no pudo registrarse"})
     }
@@ -200,7 +203,7 @@ export const CargarEventos = () => {
                 placeholder="Informe de Reunion"
                 className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                 id="infoReunion"
-                onChange={handleInputChange}
+                onChange={handleInputChange} 
                 value={formData.infoReunion}
               ></textarea>
 
