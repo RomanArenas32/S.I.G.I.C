@@ -3,7 +3,7 @@ import AuthContext from "../context/AuthProvider";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { Home } from "../pages";
 import { ReunionApp } from "../reunion";
-import { CargarEventos, VistaEventos } from "../reunion/pages";
+import { CargarEventos } from "../reunion/pages";
 import { CrearPassword, Login } from "../auth";
 import { GestionUsuarios } from "../superadmin/GestionUsuarios";
 import { CrearUsuario, DetallesUsuario } from "../superadmin/pages";
@@ -14,6 +14,7 @@ import {
   EditarMotivoEvento,
   EditarOrganizacion,
 } from "../reunion/administrador/modificarFormularios";
+import { VistaEventos } from "../reunion/pages/vistaEventos/VistaEventos";
 
 export const AppRoutes = () => {
   const { usuarioAuth } = useContext(AuthContext);

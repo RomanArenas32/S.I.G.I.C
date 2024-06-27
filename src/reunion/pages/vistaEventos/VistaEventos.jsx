@@ -1,5 +1,4 @@
-import React from 'react'
-import { BotonVolver } from '../../utils';
+import { BotonVolver } from '../../../utils';
 
 export const VistaEventos = () => {
   return (
